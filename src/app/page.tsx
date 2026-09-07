@@ -54,60 +54,86 @@ export default function LandingPage() {
 
   return (
     <div className="aurora-wash">
-      {/* HERO */}
-      <section className="relative h-[calc(100vh-72px)] min-h-[620px] flex items-center overflow-hidden">
-        <Image
-          src="/images/antarctic-landscape-2.jpg"
-          alt="Antarctic landscape"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/85 via-navy-deep/70 to-navy-deep" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/40 to-transparent" />
-
-        <div className="relative mx-auto max-w-[1600px] px-6 lg:px-10 w-full">
+      {/* HERO — text beside the photograph, so the image keeps its full colour
+          instead of sitting under a scrim (a light-site pattern, per BAS/AAD). */}
+      <section className="mx-auto max-w-[1600px] px-6 lg:px-10 pt-16 pb-20">
+        <div className="grid lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-14 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl"
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-frost/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber shadow-amberGlow" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-surface shadow-card px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-secondary font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               National Centre for Polar and Ocean Research
             </div>
 
-            <h1 className="heading-serif mt-8 text-6xl lg:text-8xl font-semibold leading-[0.95] text-ice">
+            <h1 className="heading-serif mt-7 text-5xl lg:text-7xl font-semibold leading-[1.02]">
               {t("hero_title")}
             </h1>
 
-            <p className="mt-8 text-lg lg:text-xl text-ice/65 max-w-2xl leading-relaxed">
+            <p className="mt-6 text-lg lg:text-xl text-ink/90 max-w-xl leading-relaxed">
               {t("hero_subtitle")}
             </p>
 
-            <div className="mt-12 flex flex-wrap gap-4">
+            <div className="mt-9 flex flex-wrap gap-4">
               <Link
                 href="/atlas"
-                className="group inline-flex items-center gap-3 rounded-full bg-amber px-8 py-4 text-navy-deep font-semibold text-sm shadow-amberGlow transition-transform hover:scale-[1.03]"
+                className="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-4 text-ink font-bold text-sm shadow-accentGlow transition-transform hover:scale-[1.03]"
               >
                 {t("hero_cta")}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/research"
-                className="inline-flex items-center gap-3 rounded-full glass px-8 py-4 text-ice/80 text-sm hover:text-ice transition-colors"
+                className="inline-flex items-center gap-3 rounded-full bg-surface shadow-card px-8 py-4 text-secondary font-semibold text-sm hover:shadow-cardHover transition-shadow"
               >
                 {t("nav_research")}
               </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            className="relative"
+          >
+            <div className="relative h-[340px] sm:h-[420px] lg:h-[520px] rounded-2xl overflow-hidden shadow-cardHover">
+              <Image
+                src="/images/antarctic-landscape-2.jpg"
+                alt="Antarctic landscape"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="absolute -bottom-6 -left-4 sm:left-6 bg-surface rounded-2xl shadow-cardHover px-6 py-4 flex items-center gap-4">
+              <div>
+                <div className="text-2xl font-bold text-secondary tabular-nums leading-none">4</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-ink/75">
+                  Stations
+                </div>
+              </div>
+              <div className="w-px h-9 bg-line" />
+              <div>
+                <div className="text-2xl font-bold text-secondary tabular-nums leading-none">2</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-ink/75">Poles</div>
+              </div>
+              <div className="w-px h-9 bg-line" />
+              <div>
+                <div className="text-2xl font-bold text-secondary tabular-nums leading-none">45+</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-ink/75">Years</div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* COUNTERS */}
-      <section className="relative border-y border-white/8 bg-navy/40 backdrop-blur-sm">
+      <section className="relative border-y border-line bg-surface/40 backdrop-blur-sm">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-20 grid grid-cols-2 lg:grid-cols-4 gap-12">
           <AnimatedCounter value={expeditions.length} label={t("stat_expeditions")} delay={0} />
           <AnimatedCounter value={45} label={t("stat_years")} suffix="+" delay={0.12} />
@@ -124,10 +150,10 @@ export default function LandingPage() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
         >
-          <div className="text-[11px] uppercase tracking-[0.24em] text-frost/60">
+          <div className="text-[11px] uppercase tracking-[0.24em] text-secondary">
             {t("section_stations")}
           </div>
-          <h2 className="heading-serif mt-4 text-4xl lg:text-5xl font-semibold text-ice max-w-2xl">
+          <h2 className="heading-serif mt-4 text-4xl lg:text-5xl font-semibold max-w-2xl">
             Four outposts, two poles
           </h2>
         </motion.div>
@@ -151,13 +177,13 @@ export default function LandingPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-page via-page/30 to-transparent" />
                 <div className="absolute top-4 right-4">
                   <span
                     className={`px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium ${
                       station.status === "active"
-                        ? "bg-amber/90 text-navy-deep"
-                        : "bg-white/12 text-ice/60"
+                        ? "bg-accent/90 text-ink"
+                        : "bg-slate-100 text-ink/80"
                     }`}
                   >
                     {station.status}
@@ -166,11 +192,11 @@ export default function LandingPage() {
               </div>
               <div className="p-6">
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="heading-serif text-2xl text-ice">{station.name}</h3>
-                  <span className="text-frost text-sm tabular-nums">{station.established}</span>
+                  <h3 className="heading-serif text-2xl">{station.name}</h3>
+                  <span className="text-primary text-sm tabular-nums">{station.established}</span>
                 </div>
-                <p className="mt-2 text-xs text-ice/40 uppercase tracking-wider">{station.region}</p>
-                <p className="mt-4 text-sm text-ice/55 leading-relaxed line-clamp-3">
+                <p className="mt-2 text-xs text-ink/65 uppercase tracking-wider">{station.region}</p>
+                <p className="mt-4 text-sm text-ink/75 leading-relaxed line-clamp-3">
                   {station.description}
                 </p>
               </div>
@@ -194,23 +220,26 @@ export default function LandingPage() {
               >
                 <Link
                   href={mod.href}
-                  className="group relative block h-72 rounded-2xl overflow-hidden glass"
+                  className="group card overflow-hidden flex flex-col h-full hover:shadow-cardHover transition-shadow"
                 >
-                  <Image
-                    src={mod.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover opacity-40 transition-all duration-700 group-hover:opacity-60 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-navy-deep via-navy-deep/80 to-transparent" />
-                  <div className="relative h-full p-10 flex flex-col justify-end">
-                    <Icon className="w-8 h-8 text-frost mb-5" />
-                    <h3 className="heading-serif text-3xl text-ice">{t(mod.titleKey)}</h3>
-                    <p className="mt-3 text-sm text-ice/55 max-w-md leading-relaxed">
+                  <div className="relative h-44 overflow-hidden">
+                    <Image
+                      src={mod.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <span className="absolute top-4 left-4 w-11 h-11 rounded-2xl bg-surface/95 shadow-card grid place-items-center">
+                      <Icon className="w-5 h-5 text-secondary" />
+                    </span>
+                  </div>
+                  <div className="p-8">
+                    <h3 className="heading-serif text-2xl lg:text-3xl">{t(mod.titleKey)}</h3>
+                    <p className="mt-3 text-sm text-ink/85 max-w-md leading-relaxed">
                       {t(mod.descKey)}
                     </p>
-                    <div className="mt-6 inline-flex items-center gap-2 text-amber text-sm font-medium">
+                    <div className="mt-5 inline-flex items-center gap-2 text-secondary text-sm font-bold">
                       Open
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
                     </div>
@@ -231,10 +260,10 @@ export default function LandingPage() {
           transition={{ duration: 0.7 }}
           className="glass rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row gap-10 lg:items-center"
         >
-          <ScrollText className="w-12 h-12 text-amber shrink-0" />
+          <ScrollText className="w-12 h-12 text-accent-ink shrink-0" />
           <div>
-            <h3 className="heading-serif text-3xl text-ice">The Indian Antarctic Act, 2022</h3>
-            <p className="mt-4 text-ice/55 leading-relaxed max-w-4xl">
+            <h3 className="heading-serif text-3xl">The Indian Antarctic Act, 2022</h3>
+            <p className="mt-4 text-ink/75 leading-relaxed max-w-4xl">
               Act No. 13 of 2022 gives domestic legal effect to India&apos;s obligations under the Antarctic
               Treaty, CCAMLR and the Environmental Protocol. It requires a permit for every Indian
               expedition, station, vessel and aircraft in Antarctica, and prohibits mining, nuclear

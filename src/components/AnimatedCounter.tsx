@@ -45,11 +45,11 @@ export default function AnimatedCounter({ value, label, suffix = "", delay = 0 }
       transition={{ duration: 0.7, delay }}
       className="text-center"
     >
-      <div className="heading-serif text-5xl lg:text-6xl font-semibold text-ice tabular-nums">
+      <div className="heading-serif text-5xl lg:text-6xl font-semibold tabular-nums">
         {display}
-        <span className="text-frost">{suffix}</span>
+        <span className="text-primary">{suffix}</span>
       </div>
-      <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-ice/45">{label}</div>
+      <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-ink/70">{label}</div>
     </motion.div>
   );
 }

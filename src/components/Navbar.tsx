@@ -27,10 +27,10 @@ export default function Navbar() {
       <div className="glass border-x-0 border-t-0">
         <nav className="mx-auto max-w-[1600px] px-6 lg:px-10 h-[72px] flex items-center justify-between gap-6">
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            <Snowflake className="w-6 h-6 text-frost transition-transform duration-500 group-hover:rotate-90" />
+            <Snowflake className="w-6 h-6 text-primary transition-transform duration-500 group-hover:rotate-90" />
             <div className="leading-none">
-              <div className="heading-serif text-lg font-semibold text-ice">Polar India</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-frost/60 mt-1">NCPOR · MoES</div>
+              <div className="heading-serif text-lg font-semibold">Polar India</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-secondary mt-1">NCPOR · MoES</div>
             </div>
           </Link>
 
@@ -42,13 +42,13 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`relative px-4 py-2 text-sm rounded-full transition-colors ${
-                    active ? "text-ice" : "text-ice/55 hover:text-ice/90"
+                    active ? "text-ink" : "text-ink/75 hover:text-ink/95"
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 rounded-full bg-frost/12 border border-frost/25"
+                      className="absolute inset-0 rounded-full bg-primary/12 border border-primary/25"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -59,15 +59,15 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center rounded-full border border-white/12 p-0.5 text-xs">
+            <div className="flex items-center rounded-full border border-line p-0.5 text-xs">
               {(["en", "hi"] as const).map((code) => (
                 <button
                   key={code}
                   onClick={() => setLang(code)}
                   className={`px-3 py-1.5 rounded-full transition-all ${
                     lang === code
-                      ? "bg-amber text-navy-deep font-semibold"
-                      : "text-ice/55 hover:text-ice"
+                      ? "bg-accent text-ink font-semibold"
+                      : "text-ink/75 hover:text-ink"
                   }`}
                 >
                   {code === "en" ? "EN" : "हिंदी"}
@@ -76,7 +76,7 @@ export default function Navbar() {
             </div>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden p-2 text-ice/70 hover:text-ice"
+              className="lg:hidden p-2 text-ink/85 hover:text-ink"
               aria-label="Toggle navigation"
             >
               {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -97,7 +97,7 @@ export default function Navbar() {
               href={link.href}
               onClick={() => setOpen(false)}
               className={`px-4 py-3 rounded-xl text-sm ${
-                pathname === link.href ? "bg-frost/12 text-ice" : "text-ice/60"
+                pathname === link.href ? "bg-primary/12 text-ink" : "text-ink/80"
               }`}
             >
               {t(link.key)}

@@ -2,12 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mirrors tailwind.config.ts — for raw CSS, SVG, canvas and Leaflet markup. */
 :root {
-  --navy: #0a1628;
-  --navy-deep: #050c17;
-  --ice: #f0f7ff;
-  --cyan: #7dd3fc;
-  --amber: #fbbf24;
+  --page: #fbfcfd;
+  --surface: #ffffff;
+  --surface-soft: #f5f9fc;
+  --primary: #0ea5e9;
+  --primary-soft: #7dd3fc;
+  --primary-dark: #0284c7;
+  --secondary: #0369a1;
+  --accent: #f59e0b;
+  --accent-soft: #fcd34d;
+  --accent-ink: #b45309;
+  --highlight: #fb7185;
+  --mint: #34d399;
+  --ink: #334155;
+  --ink-soft: #64748b;
+  --ink-muted: #94a3b8;
+  --line: #e2e8f0;
+  --wash: #e0f2fe;
 }
 
 html {
@@ -15,32 +28,46 @@ html {
 }
 
 body {
-  background-color: var(--navy-deep);
-  color: var(--ice);
+  background-color: var(--page);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
 
 @layer components {
-  .glass {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10;
+  /* Cards read as white panels lifted off the page by shadow, not outlined. */
+  .card {
+    @apply bg-surface rounded-2xl shadow-card;
   }
 
+  /* Kept as `.glass` so existing markup picks up the light treatment. */
+  .glass {
+    @apply bg-surface rounded-2xl shadow-card;
+  }
+
+  /* Pale blue-to-white section wash. */
   .aurora-wash {
     background-image:
-      radial-gradient(60% 50% at 15% 0%, rgba(125, 211, 252, 0.16), transparent 70%),
-      radial-gradient(50% 45% at 85% 15%, rgba(56, 189, 248, 0.1), transparent 70%),
-      radial-gradient(45% 40% at 50% 100%, rgba(251, 191, 36, 0.07), transparent 70%);
+      linear-gradient(180deg, rgba(224, 242, 254, 0.85) 0%, rgba(255, 255, 255, 0) 38%),
+      radial-gradient(60% 45% at 85% 0%, rgba(125, 211, 252, 0.28), transparent 70%),
+      radial-gradient(50% 40% at 8% 12%, rgba(224, 242, 254, 0.55), transparent 70%);
   }
 
   .heading-serif {
     font-family: var(--font-serif), Georgia, "Times New Roman", serif;
-    @apply tracking-tight;
+    @apply tracking-tight text-secondary;
+  }
+
+  .heading-display {
+    font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+    @apply font-bold tracking-tight;
   }
 }
 
-/* Leaflet dark theming */
+/* ---------------- Leaflet — light theming ---------------- */
+/* Matches the Esri light-canvas ocean tone, so when the view is zoomed out far
+   enough to show both poles the area beyond the tiles blends in seamlessly. */
 .leaflet-container {
-  background: #050c17;
+  background: #d5d6da;
   font-family: inherit;
 }
 
@@ -51,34 +78,34 @@ body {
 }
 
 .leaflet-tooltip {
-  background: #0a1628 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  color: #f0f7ff !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
 }
 
 .leaflet-tooltip-top::before {
-  border-top-color: rgba(255, 255, 255, 0.12) !important;
+  border-top-color: var(--line) !important;
 }
 
 .leaflet-control-attribution {
-  background: rgba(5, 12, 23, 0.8) !important;
-  color: rgba(240, 247, 255, 0.45) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  color: var(--ink-muted) !important;
   font-size: 10px !important;
 }
 
 .leaflet-control-attribution a {
-  color: rgba(125, 211, 252, 0.7) !important;
+  color: var(--primary-dark) !important;
 }
 
 .leaflet-bar a {
-  background: rgba(10, 22, 40, 0.9) !important;
-  color: #f0f7ff !important;
-  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: #ffffff !important;
+  color: var(--secondary) !important;
+  border-color: var(--line) !important;
 }
 
 .leaflet-bar a:hover {
-  background: rgba(125, 211, 252, 0.2) !important;
+  background: var(--wash) !important;
 }
 
 .station-marker-pulse {
@@ -86,25 +113,27 @@ body {
 }
 
 @keyframes markerPulse {
-  0%, 100% { transform: scale(1); opacity: 0.85; }
-  50% { transform: scale(1.35); opacity: 0.25; }
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.35); opacity: 0.2; }
 }
 
+/* ---------------- Scrollbars ---------------- */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #050c17;
+  background: var(--page);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(125, 211, 252, 0.22);
+  background: rgba(14, 165, 233, 0.3);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(125, 211, 252, 0.4);
+  background: rgba(14, 165, 233, 0.5);
 }
 
+/* ---------------- Range inputs ---------------- */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -112,41 +141,53 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  height: 6px;
+  height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
+  background: #dbeafe;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  height: 22px;
-  width: 22px;
+  height: 24px;
+  width: 24px;
   margin-top: -8px;
   border-radius: 999px;
-  background: var(--amber);
-  border: 3px solid #0a1628;
-  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.25), 0 4px 12px rgba(0, 0, 0, 0.5);
+  background: var(--accent);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.45);
   cursor: grab;
   transition: transform 0.15s ease;
 }
 
 input[type="range"]:active::-webkit-slider-thumb {
-  transform: scale(1.15);
+  transform: scale(1.14);
   cursor: grabbing;
 }
 
 input[type="range"]::-moz-range-track {
-  height: 6px;
+  height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
+  background: #dbeafe;
 }
 
 input[type="range"]::-moz-range-thumb {
-  height: 22px;
-  width: 22px;
+  height: 24px;
+  width: 24px;
   border-radius: 999px;
-  background: var(--amber);
-  border: 3px solid #0a1628;
+  background: var(--accent);
+  border: 3px solid #ffffff;
   cursor: grab;
+}
+
+/* Canvas games should never show a text cursor or blue selection flash. */
+canvas {
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .station-marker-pulse,
+  .animate-bobble {
+    animation: none !important;
+  }
 }

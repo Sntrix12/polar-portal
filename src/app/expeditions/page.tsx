@@ -29,11 +29,11 @@ export default function ExpeditionsPage() {
     <div className="aurora-wash min-h-screen">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-10 pt-14 pb-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <div className="text-[11px] uppercase tracking-[0.24em] text-frost/60">Archive</div>
-          <h1 className="heading-serif mt-4 text-5xl lg:text-6xl font-semibold text-ice">
+          <div className="text-[11px] uppercase tracking-[0.24em] text-secondary">Archive</div>
+          <h1 className="heading-serif mt-4 text-5xl lg:text-6xl font-semibold">
             {t("expeditions_title")}
           </h1>
-          <p className="mt-4 text-ice/55 max-w-2xl">{t("expeditions_subtitle")}</p>
+          <p className="mt-4 text-ink/75 max-w-2xl">{t("expeditions_subtitle")}</p>
         </motion.div>
 
         <motion.div
@@ -48,15 +48,15 @@ export default function ExpeditionsPage() {
               onClick={() => setDecadeIndex(i)}
               className={`px-4 py-2 rounded-full text-xs transition-all border ${
                 decadeIndex === i
-                  ? "bg-amber/15 border-amber/40 text-amber-soft"
-                  : "border-white/10 text-ice/50 hover:text-ice/80 hover:border-white/20"
+                  ? "bg-accent/15 border-accent/40 text-accent-ink"
+                  : "border-line text-ink/70 hover:text-ink/90 hover:border-line"
               }`}
             >
               {d.label}
             </button>
           ))}
-          <span className="ml-auto text-sm text-ice/40 tabular-nums">
-            <span className="text-ice font-medium">{filtered.length}</span> expeditions
+          <span className="ml-auto text-sm text-ink/65 tabular-nums">
+            <span className="text-ink font-medium">{filtered.length}</span> expeditions
           </span>
         </motion.div>
       </div>
@@ -64,7 +64,7 @@ export default function ExpeditionsPage() {
       {/* TIMELINE */}
       <div className="mx-auto max-w-[1200px] px-6 lg:px-10 pb-28">
         <div className="relative">
-          <div className="absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-frost/40 via-white/10 to-transparent" />
+          <div className="absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-white/10 to-transparent" />
 
           <div className="space-y-10">
             {filtered.map((exp, i) => {
@@ -82,12 +82,12 @@ export default function ExpeditionsPage() {
                 >
                   {/* node */}
                   <div
-                    className={`absolute top-7 w-[14px] h-[14px] rounded-full bg-amber border-[3px] border-navy-deep shadow-amberGlow left-[13px] ${
+                    className={`absolute top-7 w-[14px] h-[14px] rounded-full bg-accent border-[3px] border-page shadow-accentGlow left-[13px] ${
                       alignRight ? "md:-left-[7px]" : "md:left-auto md:-right-[7px]"
                     }`}
                   />
 
-                  <div className="glass rounded-2xl overflow-hidden group hover:border-frost/25 transition-colors">
+                  <div className="glass rounded-2xl overflow-hidden group hover:border-primary/25 transition-colors">
                     <div className="relative h-40 overflow-hidden">
                       <Image
                         src={exp.image}
@@ -97,30 +97,30 @@ export default function ExpeditionsPage() {
                         priority={i < 2}
                         className="object-cover opacity-60 transition-all duration-700 group-hover:opacity-80 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
                       <div className="absolute bottom-4 left-6 right-6">
                         <div className={`flex items-baseline gap-3 flex-wrap ${alignRight ? "" : "md:justify-end"}`}>
-                          <span className="heading-serif text-4xl text-ice">{exp.number}</span>
-                          <span className="text-sm text-amber tabular-nums">{exp.yearsLabel}</span>
+                          <span className="heading-serif text-4xl">{exp.number}</span>
+                          <span className="text-sm text-accent-ink tabular-nums">{exp.yearsLabel}</span>
                         </div>
                       </div>
                     </div>
 
                     <div className={`p-6 space-y-3 ${alignRight ? "" : "md:text-right"}`}>
-                      <h3 className="text-sm text-ice/85 leading-snug">{exp.label}</h3>
+                      <h3 className="text-sm text-ink/95 leading-snug">{exp.label}</h3>
 
-                      <div className={`flex items-center gap-2 text-xs text-ice/45 ${alignRight ? "" : "md:justify-end"}`}>
+                      <div className={`flex items-center gap-2 text-xs text-ink/70 ${alignRight ? "" : "md:justify-end"}`}>
                         <User className="w-3.5 h-3.5 shrink-0" />
                         {exp.leader}
                       </div>
 
-                      <div className={`flex items-center gap-2 text-xs text-frost/70 ${alignRight ? "" : "md:justify-end"}`}>
+                      <div className={`flex items-center gap-2 text-xs text-secondary ${alignRight ? "" : "md:justify-end"}`}>
                         <Target className="w-3.5 h-3.5 shrink-0" />
                         {exp.focusArea}
                       </div>
 
-                      <div className={`flex gap-2 text-xs text-ice/55 leading-relaxed pt-2 border-t border-white/8 ${alignRight ? "" : "md:flex-row-reverse md:text-right"}`}>
-                        <Award className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber/60" />
+                      <div className={`flex gap-2 text-xs text-ink/75 leading-relaxed pt-2 border-t border-line ${alignRight ? "" : "md:flex-row-reverse md:text-right"}`}>
+                        <Award className="w-3.5 h-3.5 shrink-0 mt-0.5 text-accent-ink" />
                         <p>{exp.achievement}</p>
                       </div>
                     </div>

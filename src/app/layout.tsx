@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="font-sans antialiased bg-navy-deep text-ice min-h-screen">
+      <body className="font-sans antialiased bg-page text-ink min-h-screen">
         <LanguageProvider>
           <Navbar />
           <main className="pt-[72px]">{children}</main>
